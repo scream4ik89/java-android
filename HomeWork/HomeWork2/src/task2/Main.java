@@ -12,7 +12,7 @@ public class Main {
     }
 
     public static void main(String[] arg) {
-        int[] array = new int[10];    // Считаю глупостью вводить double т.к. они никогда не повторятся!!!
+        int[] array = new int[10];    // Считаю не целесообразно вводить double т.к. они никогда не повторятся!!!
         for (int i = 0; i < array.length; i++) {
             array[i] = 0 + (int) (Math.random() * 10);
         }
