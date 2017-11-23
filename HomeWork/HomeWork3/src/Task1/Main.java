@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
     static public int[] input(int array[]){
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Введите размерность массива");
         for (int i = 0; i < array.length; i++) {
             System.out.print("Введите " + (i + 1) + "-й элемент массива: ");
             array[i] = scanner.nextInt();
@@ -55,7 +53,9 @@ public class Main {
         return array;
     }
     public static void main(String[] arg){
-        int[] array  = new int [10];
+        System.out.println("Введите размерность массива: ");
+        int N = scanner.nextInt();
+        int[] array  = new int [N];
         array = input(array);
         System.out.println(" Исходный массив: ");
         print(array);
