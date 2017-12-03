@@ -90,7 +90,7 @@ public class Main {
         age = inputs.nextInt();
         System.out.println("Введите пол пациента:");
         gender = inputs.next();
-        System.out.println("Введите состояние пациента: 0 - не выписан, 1 - выписан");
+        System.out.println("Введите состояние пациента: false - не выписан, true - выписан");
         heals = inputs.hasNextBoolean();
         return new Pacient(name, age, heals, gender, sorname, lastname);
     }
@@ -130,7 +130,7 @@ public class Main {
                 searchByGender(pacients, output.next());
                 break;
             case 6:
-                System.out.println("Введите состояние пациента: 0 - не выписан, 1 - выписан");
+                System.out.println("Введите состояние пациента: false - не выписан, true - выписан");
                 searchByHeals(pacients, output.hasNextBoolean());
                 break;
         }
