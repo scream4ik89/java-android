@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
         public static void main(String[] arg){
         int key;
-        Atm atm = new Atm(0, 0, 0, 0);
         Scanner scanner = new Scanner(System.in);
+        Atm atm = new Atm();
         System.out.println("Для добавления денег нажмите - 1");
         System.out.println("Для снятия денег нажмите - 2");
         key = scanner.nextInt();
