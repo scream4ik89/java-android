@@ -13,16 +13,14 @@ public Pacient(String name, int age, boolean heals, String gender, String sornam
     this.sorname = sorname;
     this.lastname = lastname;
 }
-public String getName(){
+    public String getName(){
     return name;
 }
-public String getGender(){
-    return gender;
-    }
-public int getAge(){
+    public String getGender(){return gender; }
+    public int getAge(){
     return age;
 }
-public boolean getHeals(){
+    public boolean getHeals(){
     return heals;
 }
     public String getSorname(){
@@ -31,7 +29,7 @@ public boolean getHeals(){
     public String getLastname(){
         return lastname;
     }
-public void setName(String name){
+    public void setName(String name){
     this.name = name;
 }
     public void setGender(String gender){
