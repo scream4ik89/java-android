@@ -6,7 +6,7 @@ import java.util.List;
 public class Room {
     private static int maxPercent = 70; //максимальное заполнение площади мебелью
     private double area, freeArea;  // плозадь и сколько свободно площади осталось
-    private int windows;
+    public static final int window = 700;
     private List<Lamp> lampList = new ArrayList<>();
     private List<Furniture> furnitureList = new ArrayList<>();
     private void addLamp(Lamp lamp){
@@ -24,13 +24,7 @@ public class Room {
         return null;
     }
 
-    public int getWindows() {
-        return windows;
-    }
 
-    public void setWindows(int windows) {
-        this.windows = windows;
-    }
 
     public double getArea() {
         return area;
