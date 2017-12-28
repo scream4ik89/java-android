@@ -17,11 +17,17 @@ public class Building {
         return nameBuilding;
     }
 
+    public Building(String nameBuilding){
+        this.nameBuilding = nameBuilding;
+    }
     @Override
     public String toString() {
-        return "Building{" +
-                "nameBuilding='" + nameBuilding + '\'' +
-                ", roomList=" + roomList +
-                '}';
+        String buff = "";
+        for (int i = 0; i < roomList.size(); i++){
+            buff += "      Комната " + (i + 1);
+            buff += roomList.get(i);
+        }
+        return  "Здание - " + nameBuilding + '\n' +
+                buff;
     }
 }
