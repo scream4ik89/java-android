@@ -13,7 +13,6 @@ import java.util.TimeZone;
 public class DataGsonConverter implements JsonDeserializer<Date>{
 
 private final String[] formats = new String[]{
-        "yyyy-MM-dd HH:mm",
         "yyyy-MM-dd"
 };
 
