@@ -42,13 +42,18 @@ public class Xml {
 
         NodeList namePub = rootElement.getElementsByTagName("name");
         NodeList locationPub = rootElement.getElementsByTagName("location");
-        NodeList emailPub = rootElement.getElementsByTagName("email");
+        NodeList emailPub = rootElement.getElementsByTagName("emails");
 
         pub.setName(namePub.item(0).getTextContent());
         pub.setLocation(locationPub.item(0).getTextContent());
         for (int j = 0; j < emailPub.getLength(); j++) {
-            emailsList.add(emailPub.item(j).getTextContent());
+            Node tmp = emailPub.item(j);
+            if (tmp.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+            emailsList.add(tmp.getTextContent());
         }
+        pub.setEmails((ArrayList<String>) emailsList);
 
         ArrayList<Beer> beerList = new ArrayList<>();
 
