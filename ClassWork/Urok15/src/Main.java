@@ -47,9 +47,9 @@ public class Main {    // данный способ годится если на
             }
         });
         thread1.setName("thread1");  // задать имя потоку
-             thread1.start();
-             thread2.start();
-             thread2.setPriority(Thread.MAX_PRIORITY); // приоритет выполнения приоритета
+        thread1.start();
+        thread2.start();
+        thread2.setPriority(Thread.MAX_PRIORITY); // приоритет выполнения приоритета
         thread2.isDaemon(); //поток демон который живет пока живут дополнительные потоки. по завершению всех потоков, main их прервет
     }
 
@@ -57,3 +57,4 @@ public class Main {    // данный способ годится если на
         Thread.currentThread().getName(); // получить имя потока который использует данный метод
     }
 }
+
