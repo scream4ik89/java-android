@@ -1,4 +1,4 @@
-package manager;
+package manager.Download;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,9 +19,9 @@ public class Downloader {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 File file;
                 if (urlAdress.contains(".json")) {
-                    file = new File( "work.json");
+                    file = new File( "pub.json");
                 } else {
-                    file = new File("work.xml");
+                    file = new File("pub.xml");
                 }
 
                 try (InputStream streamIn = connection.getInputStream();

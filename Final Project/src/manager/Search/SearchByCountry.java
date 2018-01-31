@@ -1,6 +1,5 @@
-package manager.Sort;
+package manager.Search;
 
-import manager.Main;
 import model.entity.Beer;
 
 import java.io.BufferedReader;
@@ -10,15 +9,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SearchByName extends Search {
-    @Override
-    public void sort(List<Beer> list) throws IOException {
+public class SearchByCountry {
+
+    public static void search(List<Beer> beers) throws IOException {
         do {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
                 String str = reader.readLine().toLowerCase();
-                Pattern p = Pattern.compile("[a-zA-Z, ]+");
+                Pattern p = Pattern.compile("[A-Z]{2}");
                 Matcher m = p.matcher(str);
                 if (!m.matches()) {
 
@@ -26,24 +25,23 @@ public class SearchByName extends Search {
 
                 } else {
                     int countName = 0;
-                    for (Beer goods : list) {
-                        if (goods.getName().toLowerCase().contains(str)) {
-                            Beer.printEmployee(goods);
+                    for (Beer goods : beers) {
+                        if (goods.getCountry().toLowerCase().contains(str)) {
+                            Beer.printBeer(goods);
                             countName++;
                         }
                     }
                     if (countName == 0) {
-                        Main.printSearchFail();
+                        System.out.println("Поиск не дал результатов. Совпадений не найдено");
                         break;
                     }
                     break;
                 }
             }catch (Exception e){
-                System.out.println("Неверный ввод данных используйте буквы латинского алфавита");
+                System.out.println("Неверный ввод данных используйте, используй 2 " +
+                        "заглавных буквы латинского алфавита");
             }
         } while (true);
     }
-    }
-
-
+}
 

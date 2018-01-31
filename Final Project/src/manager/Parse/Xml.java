@@ -18,17 +18,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-;
+
 
 
 public class Xml {
-    public static synchronized Pub parseXML() throws ParseException {
+    public static Pub parseXML() throws ParseException {
 
         Document document;
 
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            document = builder.parse(new File("work.xml"));
+            document = builder.parse(new File("pub.xml"));
         } catch (ParserConfigurationException | IOException | SAXException e) {
             System.out.println("Невозможно открыть XML " + e.getMessage());
             return null;
@@ -84,6 +84,7 @@ public class Xml {
             beerList.add(beer);
         }
         pub.setGoods(beerList);
+        System.out.println(pub.toString());
         return pub;
     }
 }

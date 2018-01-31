@@ -1,6 +1,5 @@
-package manager.Sort;
+package manager.Search;
 
-import manager.Main;
 import model.entity.Beer;
 
 import java.io.BufferedReader;
@@ -10,16 +9,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SearchByPrice extends Search {
-    @Override
-    public void sort(List<Beer> list) throws IOException {
+public class SearchByPrice {
+
+    public static void search(List<Beer> beers) throws IOException {
 
         do {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
                 String str = reader.readLine().toLowerCase();
-                Pattern p = Pattern.compile("[0-9]+");
+                Pattern p = Pattern.compile("\\d+");
                 Matcher m = p.matcher(str);
                 if (!m.matches()) {
 
@@ -27,20 +26,20 @@ public class SearchByPrice extends Search {
 
                 } else {
                     int countPrice = 0;
-                    for (Beer goods : list) {
+                    for (Beer goods : beers) {
                         if (goods.getPrice().equals(str)) {
-                            Beer.printEmployee(goods);
+                            Beer.printBeer(goods);
                             countPrice++;
                         }
                     }
                     if (countPrice == 0) {
-                        Main.printSearchFail();
+                        System.out.println("Поиск не дал результатов. Совпадений не найдено");
                         break;
                     }
                     break;
                 }
             }catch (Exception e){
-                System.out.println("Неверный ввод данных используйте буквы латинского алфавита");
+                System.out.println("Неверный ввод данных используйте только цифры");
             }
         } while (true);
     }

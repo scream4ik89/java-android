@@ -12,10 +12,10 @@ import java.util.Date;
 
 public class Json {
 
-    public static synchronized Pub parseJson() {
+    public static Pub parseJson() {
         Pub pub = null;
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("work.json")))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("pub.json")))) {
             GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Date.class, new DataGsonConverter());
             Gson gson = builder.create();
             pub = gson.fromJson(bufferedReader, Pub.class);
@@ -23,8 +23,9 @@ public class Json {
             e.getMessage();
             return pub;
         }
-
+        System.out.println(pub.toString());
         return pub;
     }
+
 }
 
