@@ -16,17 +16,15 @@ public class SearchByCountry {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
-                String str = reader.readLine().toLowerCase();
+                String str = reader.readLine().toUpperCase();
                 Pattern p = Pattern.compile("[A-Z]{2}");
                 Matcher m = p.matcher(str);
                 if (!m.matches()) {
-
                     throw new Exception();
-
                 } else {
                     int countName = 0;
                     for (Beer goods : beers) {
-                        if (goods.getCountry().toLowerCase().contains(str)) {
+                        if (goods.getCountry().toUpperCase().contains(str)) {
                             Beer.printBeer(goods);
                             countName++;
                         }

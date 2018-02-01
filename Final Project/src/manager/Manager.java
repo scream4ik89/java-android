@@ -1,11 +1,9 @@
 package manager;
 
-import manager.Download.Downloads;
 import manager.Download.Match.Match;
 import manager.Download.Match.MatchJSON;
 import manager.Download.Match.MatchXML;
 import manager.Parse.Json;
-import manager.Parse.Parsers;
 import manager.Parse.Xml;
 import manager.Search.SearchByCountry;
 import manager.Search.SearchByDate;
@@ -18,13 +16,11 @@ import manager.Sort.SortByYear;
 import model.Exception.NoFile;
 import model.Exception.NoObject;
 import model.Input;
-import model.entity.Beer;
 import model.entity.Pub;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-
 import java.util.Collections;
 
 public class Manager  {
@@ -35,7 +31,7 @@ public class Manager  {
     private static final String beerlXML = "pub.xml";
     private static final String beerJSON = "pub.json";
     private static Pub pub;
-    private static Beer beer;
+
 
 
     //реализация паттерна Singleton
@@ -49,11 +45,8 @@ public class Manager  {
     }
     private void PrepareForWork() throws ParseException {
         System.out.println("Добро пожаловать. Выберете нужный пункт: " + "\n" +
-                "1)Загрузить Xml файл" + "\n" +
-                "2)Загрузить Json файл" + "\n" +
-                "3)Распарсить Xml" + "\n" +
-                "4)Распарсить Json" + "\n" +
-                "5)Скачать и распарсить в автоматическом режиме");
+                "1)Работа с Xml" + "\n" +
+                "2)Работа с Json" + "\n");
 
         int input = 0;
         input = Input.inputNumber();
@@ -66,8 +59,6 @@ public class Manager  {
             System.err.println(noObject.getMessage());
             this.PrepareForWork();
         }
-
-
     }
 
     private void FunctionalManualPrepareForWork(int input) throws NoFile, NoObject, ParseException {
@@ -75,49 +66,22 @@ public class Manager  {
             case 1:
                 Match xmlMatch = new MatchXML();
                 xmlMatch.checkProcess(LINKXML);
-                this.PrepareForWork();
-                break;
-
-            case 2:
-                Match jsonMatch = new MatchJSON();
-                jsonMatch.checkProcess(LINKJSON);
-                this.PrepareForWork();
-                break;
-
-            case 3:
                 if (new File(beerlXML).exists()) {
                     pub = new Xml().parseXML();
                 } else {
                     throw new NoFile("Файл " + beerlXML + " не найден. Попробуйте загрузить файл заново.");
                 }
-                this.PrepareForWork();
                 break;
 
-            case 4:
+            case 2:
+                Match jsonMatch = new MatchJSON();
+                jsonMatch.checkProcess(LINKJSON);
                 if (new File(beerJSON).exists()) {
                     pub = new Json().parseJson();
                 } else {
                     throw new NoFile("Файл " + beerJSON + " не найден. Попробуйте загрузить файл заново.");
                 }
-                this.PrepareForWork();
                 break;
-
-            case 5:
-                if (pub != null) {
-                    throw new NoObject("Обьект отсутствует, загрузите и десиреализуйте бар xml или json");
-                } else {
-                    System.out.println("Данные готовы, запуск программы");
-                    Parsers parsers = new Parsers();
-                    Downloads downloads = new Downloads();
-
-                    downloads.setParsers(parsers);
-                    parsers.setDownloads(downloads);
-
-                    downloads.start();
-                    parsers.start();
-                    return;
-                }
-
             default:
                 System.err.println("Некорректный ввод, попробуйте снова:");
                 try {
@@ -130,7 +94,6 @@ public class Manager  {
         }
 
     }
-
 
     private void begginingOfWork() throws IOException {
         System.out.println("Выберете желаемую операцию : " + "\n" +
@@ -230,6 +193,11 @@ public class Manager  {
 
         }
     }
+
+    public static void setPub(Pub pub) {
+        Manager.pub = pub;
+    }
+
     public static Manager getInstance(){
         if(instance == null){
             instance = new Manager();

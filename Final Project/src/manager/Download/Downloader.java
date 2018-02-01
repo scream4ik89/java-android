@@ -32,6 +32,7 @@ public class Downloader {
                     while ((read = streamIn.read(buffer)) != -1) {
                         streamOut.write(buffer, 0, read);
                     }
+                    streamOut.close();
                 }
             } else {
                 return;
