@@ -6,8 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /*
     Класс для поиска по определенному запросу
@@ -21,14 +19,8 @@ public class SearchByName{
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
-                String str = reader.readLine();
-                Pattern p = Pattern.compile("^[A-Z][a-z]+");
-                Matcher m = p.matcher(str);
-                if (!m.matches()) {
+                String str = capitalize(reader.readLine());
 
-                    throw new Exception();
-
-                } else {
                     int countName = 0;
                     for (Beer goods : list) {
                         if (goods.getName().contains(str)) {
@@ -41,13 +33,39 @@ public class SearchByName{
                         break;
                     }
                     break;
-                }
+
             }catch (Exception e){
                 System.out.println("Неверный ввод данных используйте буквы латинского алфавита");
             }
         } while (true);
     }
+
+    /*
+    Метод для того чтобы регистр для пользователя был не важен
+     */
+
+    public static String capitalize (String text)
+    {
+
+        String text11 = "";
+
+        text11 += Character.toString(text.charAt(0)).toUpperCase();
+
+        for (int i = 1; i < text.length(); i++)
+        {
+
+            if (Character.toString(text.charAt(i-1)).equals(" "))
+            {
+                text11 += Character.toString(text.charAt(i)).toUpperCase();
+            }
+            else
+                text11 += Character.toString(text.charAt(i));
+
+        }
+        return text11;
     }
+
+}
 
 
 

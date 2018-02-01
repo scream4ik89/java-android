@@ -6,30 +6,24 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class DataGsonConverter implements JsonDeserializer<Date> {
 
-private final String[] formats = new String[]{
-        "yyyy-mm-dd"
-};
+    private static final String DATE_FORMAT = "yyyy-MM-dd X";
 
+    //устанавливает необходимое поведение для парсинга даты
     @Override
     public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-
-        for (String format: formats){
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, Locale.getDefault());
-                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-                return simpleDateFormat.parse(jsonElement.getAsString());
-            }
-            catch (Exception e){
-
-            }
+        String fullDate = jsonElement.getAsString();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            return sdf.parse(fullDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

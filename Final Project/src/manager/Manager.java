@@ -106,7 +106,7 @@ public class Manager  {
         if (input == 1) {
             System.out.println("Добро пожаловать в поисковик: " + "\n" +
                     "1)Поиск по стране" + "\n" +
-                    "2)Поиск по году разлива" + "\n" +
+                    "2)Поиск по дате разлива" + "\n" +
                     "3)Поиск по названию пива" + "\n" +
                     "4)Поиск по цене пива" + "\n");
             input = Input.inputNumber();
@@ -136,7 +136,9 @@ public class Manager  {
         }
         begginingOfWork();
     }
-
+    /*
+        вызов метода для сортировки
+         */
     private void sortBeer(int input) {
 
         switch (input) {
@@ -167,19 +169,25 @@ public class Manager  {
         }
 
     }
-
+    /*
+        вызов метода для поиска
+         */
     private void searchBeer(int input) throws IOException {
         switch (input) {
             case 1:
+                System.out.println("Введите страну для поиска в формате 'DE, CE...");
                 SearchByCountry.search(pub.getGoods());
                 break;
             case 2:
+                System.out.println("Введите дату разлива в формате yyyy-mm-dd");
                 SearchByDate.search(pub.getGoods());
                 break;
             case 3:
+                System.out.println("Введите название пива");
                 SearchByName.search(pub.getGoods());
                 break;
             case 4:
+                System.out.println("Введите цену пива");
                 SearchByPrice.search(pub.getGoods());
                 break;
             default:

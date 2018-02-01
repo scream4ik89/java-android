@@ -41,7 +41,7 @@ public class SearchByCountry {
                 }
             }catch (Exception e){
                 System.out.println("Неверный ввод данных используйте, используй 2 " +
-                        "заглавных буквы латинского алфавита");
+                        "буквы латинского алфавита");
             }
         } while (true);
     }
