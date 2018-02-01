@@ -1,6 +1,5 @@
 package model.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Beer {
@@ -97,12 +96,4 @@ public class Beer {
                 '}';
     }
 
-    public static void printBeer(Beer beer) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        System.out.printf("%-30s%-5s%-5d%-30s%-17s%-14s%-7d%-9s%-200s%n", "ID: " + beer.getId(),  " Наименование пива: ",  beer.getName(),"" +
-                        " Страна производства: " + beer.getCountry(), " Год производства: " + sdf.format(beer.getYear()),
-                " Цена:", beer.getPrice());
-        System.out.println();
-    }
 }

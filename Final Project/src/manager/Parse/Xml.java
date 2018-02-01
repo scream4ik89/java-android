@@ -1,5 +1,6 @@
 package manager.Parse;
 
+import manager.Manager;
 import model.entity.Beer;
 import model.entity.Pub;
 import org.w3c.dom.Document;
@@ -21,7 +22,9 @@ import java.util.List;
 
 
 
-public class Xml {
+public class Xml implements Runnable {
+    Pub pub = null;
+
     public static Pub parseXML() throws ParseException {
 
         Document document;
@@ -86,5 +89,16 @@ public class Xml {
         pub.setGoods(beerList);
         System.out.println(pub.toString());
         return pub;
+    }
+
+    @Override
+    public void run() {
+
+        try {
+            parseXML();
+            Manager.getInstance().setPub(pub);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

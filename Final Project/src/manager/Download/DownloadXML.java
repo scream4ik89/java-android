@@ -14,8 +14,7 @@ import java.net.URL;
 public class DownloadXML implements FactoryDownload {
     @Override
     public void urlDownload(String urlXML) {
-        boolean checkResult = CheckURL.checkAdress(urlXML);
-        if (checkResult) {
+
             try {
                 URL url = new URL(urlXML);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -40,10 +39,10 @@ public class DownloadXML implements FactoryDownload {
                 }
             } catch (
                     IOException e) {
-                e.getMessage();
+                System.out.println("Отсутствует соеденение с интернетом, попробуйте позже" + e.getMessage());
                 return;
             }
-        } else System.out.println("Отсутствует соеденение с интернетом, попробуйте позже");
+
 
     }
 }

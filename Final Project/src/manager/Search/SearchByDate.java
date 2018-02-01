@@ -31,7 +31,7 @@ public class SearchByDate{
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         String year = sdf.format(goods.getYear());
                         if (str.equals(year)) {
-                            Beer.printBeer(goods);
+                            System.out.println(goods.toString());
                             countName++;
                         }
                     }
@@ -42,7 +42,7 @@ public class SearchByDate{
                     break;
                 }
             }catch (Exception e){
-                System.out.println("Неверный ввод данных используйте буквы латинского алфавита");
+                System.out.println("Неверный ввод данных используйте формат даты yyyy-MM-dd");
             }
         } while (true);
     }

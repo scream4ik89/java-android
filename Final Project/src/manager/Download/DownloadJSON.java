@@ -14,8 +14,6 @@ import java.net.URL;
 public class DownloadJSON implements FactoryDownload {
     @Override
     public void urlDownload(String urlJSON) {
-        boolean checkResult = CheckURL.checkAdress(urlJSON);
-        if (checkResult) {
             try {
                 URL url = new URL(urlJSON);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -40,10 +38,11 @@ public class DownloadJSON implements FactoryDownload {
                 }
             } catch (
                     IOException e) {
-                e.getMessage();
+                System.out.println("Отсутствует соеденение с интернетом, попробуйте позже" + e.getMessage());
+
                 return;
             }
-        } else System.out.println("Отсутствует соеденение с интернетом, попробуйте позже");
+
 
     }
 }

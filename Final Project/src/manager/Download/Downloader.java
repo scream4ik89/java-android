@@ -7,8 +7,13 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Downloader {
-    public static synchronized void download(String urlAdress) {
+public class Downloader implements Runnable{
+    String url;
+    public Downloader(String url) {
+        this.url = url;
+    }
+
+    public synchronized void download(String urlAdress) {
 
         try {
             URL url = new URL(urlAdress);
@@ -38,8 +43,13 @@ public class Downloader {
                 return;
             }
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println("Отсутствует соеденение с интернетом, попробуйте позже" + e.getMessage());
             return;
         }
+    }
+
+    @Override
+    public void run() {
+        download(url);
     }
 }

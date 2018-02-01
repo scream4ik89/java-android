@@ -1,8 +1,6 @@
 package manager;
 
-import manager.Download.Match.Match;
-import manager.Download.Match.MatchJSON;
-import manager.Download.Match.MatchXML;
+import manager.Download.Downloader;
 import manager.Parse.Json;
 import manager.Parse.Xml;
 import manager.Search.SearchByCountry;
@@ -62,22 +60,40 @@ public class Manager  {
     }
 
     private void FunctionalManualPrepareForWork(int input) throws NoFile, NoObject, ParseException {
+        Downloader downloader = null;
         switch (input) {
             case 1:
-                Match xmlMatch = new MatchXML();
-                xmlMatch.checkProcess(LINKXML);
+                downloader = new Downloader(LINKXML);
+                Thread thread = new Thread(downloader);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+
+                }
                 if (new File(beerlXML).exists()) {
-                    pub = new Xml().parseXML();
+                    Xml xml = new Xml();
+                    Thread thread1 = new Thread(xml);
+                    thread1.start();
+
                 } else {
                     throw new NoFile("Файл " + beerlXML + " не найден. Попробуйте загрузить файл заново.");
                 }
                 break;
 
             case 2:
-                Match jsonMatch = new MatchJSON();
-                jsonMatch.checkProcess(LINKJSON);
+                downloader = new Downloader(LINKJSON);
+                Thread thead = new Thread(downloader);
+                thead.start();
+                try {
+                    thead.join();
+                } catch (InterruptedException e) {
+
+                }
                 if (new File(beerJSON).exists()) {
-                    pub = new Json().parseJson();
+                    Json json = new Json();
+                    Thread thread1 = new Thread(json);
+                    thread1.start();
                 } else {
                     throw new NoFile("Файл " + beerJSON + " не найден. Попробуйте загрузить файл заново.");
                 }
@@ -194,7 +210,7 @@ public class Manager  {
         }
     }
 
-    public static void setPub(Pub pub) {
+    public void setPub(Pub pub) {
         Manager.pub = pub;
     }
 

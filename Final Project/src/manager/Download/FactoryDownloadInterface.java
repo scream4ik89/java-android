@@ -2,7 +2,7 @@ package manager.Download;
 
 /**
  * Реализация интерефейса FactoryDownloadInterface фабрики FactoryDownload
- * для создания обьекта Downloads.
+ * для создания обьекта
  * */
 
 public interface FactoryDownloadInterface {

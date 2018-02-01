@@ -17,7 +17,7 @@ public class SearchByPrice {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
-                String str = reader.readLine().toLowerCase();
+                String str = reader.readLine();
                 Pattern p = Pattern.compile("\\d+");
                 Matcher m = p.matcher(str);
                 if (!m.matches()) {
@@ -27,8 +27,8 @@ public class SearchByPrice {
                 } else {
                     int countPrice = 0;
                     for (Beer goods : beers) {
-                        if (goods.getPrice().equals(str)) {
-                            Beer.printBeer(goods);
+                        if (goods.getPrice().equals(Integer.valueOf(str))) {
+                            System.out.println(goods.toString());
                             countPrice++;
                         }
                     }

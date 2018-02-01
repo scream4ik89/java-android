@@ -16,8 +16,8 @@ public class SearchByName{
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             try {
-                String str = reader.readLine().toLowerCase();
-                Pattern p = Pattern.compile("[a-zA-Z, ]+");
+                String str = reader.readLine();
+                Pattern p = Pattern.compile("^[A-Z][a-z]+");
                 Matcher m = p.matcher(str);
                 if (!m.matches()) {
 
@@ -26,8 +26,8 @@ public class SearchByName{
                 } else {
                     int countName = 0;
                     for (Beer goods : list) {
-                        if (goods.getName().toLowerCase().contains(str)) {
-                            Beer.printBeer(goods);
+                        if (goods.getName().contains(str)) {
+                            System.out.println(goods.toString());
                             countName++;
                         }
                     }

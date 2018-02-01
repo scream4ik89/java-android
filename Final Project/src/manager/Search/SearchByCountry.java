@@ -25,7 +25,7 @@ public class SearchByCountry {
                     int countName = 0;
                     for (Beer goods : beers) {
                         if (goods.getCountry().toUpperCase().contains(str)) {
-                            Beer.printBeer(goods);
+                            System.out.println(goods.toString());
                             countName++;
                         }
                     }
