@@ -64,11 +64,11 @@ public class Pub {
 
     @Override
     public String toString() {
-        return "Pub{" +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", emails=" + emails +
-                ", goods=" + goods +
-                '}';
+        return  "Pub: "  +
+                "'" + name + '\'' + "\n" +
+                "Location - '" + location + '\'' +
+                ", Emails : " + emails + "\n" +
+                "Goods:" + goods;
+
     }
 }

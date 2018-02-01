@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+    Класс для поиска по определенному запросу
+    с помщью сравнения введенной информации с регулярным выражением
+     */
+
 public class SearchByCountry {
 
     public static void search(List<Beer> beers) throws IOException {
         do {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
             try {
                 String str = reader.readLine().toUpperCase();
                 Pattern p = Pattern.compile("[A-Z]{2}");

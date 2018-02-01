@@ -1,6 +1,5 @@
 package manager.Parse;
 
-import manager.Manager;
 import model.entity.Beer;
 import model.entity.Pub;
 import org.w3c.dom.Document;
@@ -19,13 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    метод для парсинга xml файла по средством DOM парсера
+     */
 
 
-
-public class Xml implements Runnable {
-    Pub pub = null;
-
-    public static Pub parseXML() throws ParseException {
+public class Xml extends AbstractParser implements Runnable {
+    public void parse()  {
 
         Document document;
 
@@ -34,7 +33,7 @@ public class Xml implements Runnable {
             document = builder.parse(new File("pub.xml"));
         } catch (ParserConfigurationException | IOException | SAXException e) {
             System.out.println("Невозможно открыть XML " + e.getMessage());
-            return null;
+            return;
         }
 
         //наш объект, который мы будем заполнять данными из xml
@@ -81,24 +80,17 @@ public class Xml implements Runnable {
             beer.setId(Integer.valueOf(idBeer.item(0).getTextContent()));
             beer.setName(nameBeer.item(0).getTextContent());
             beer.setCountry(countryBeer.item(0).getTextContent());
-            beer.setYear(format.parse(yearOfBeer.item(0).getTextContent()));
+            try {
+                beer.setYear(format.parse(yearOfBeer.item(0).getTextContent()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             beer.setPrice(Integer.valueOf(priceofBeer.item(0).getTextContent()));
             beer.setVisible(Boolean.parseBoolean(visibleBeer.item(0).getTextContent()));
             beerList.add(beer);
         }
         pub.setGoods(beerList);
         System.out.println(pub.toString());
-        return pub;
-    }
-
-    @Override
-    public void run() {
-
-        try {
-            parseXML();
-            Manager.getInstance().setPub(pub);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        setPub(pub);
     }
 }

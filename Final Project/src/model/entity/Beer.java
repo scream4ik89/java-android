@@ -86,14 +86,14 @@ public class Beer {
 
     @Override
     public String toString() {
-        return "Beer{" +
+        return "\n" + "Beer: " +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", year=" + year +
-                ", price=" + price +
-                ", visible=" + visible +
-                '}';
+                ", name - '" + name + '\'' +
+                ", country - '" + country + '\'' +
+                ", year - " + year +
+                ", price - " + price +
+                " visible - " + visible;
+
     }
 
 }

@@ -1,12 +1,16 @@
 package manager.Download;
 
+import manager.Manager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+/*
+    класс для скачивания xml или json файла
+     */
 public class Downloader implements Runnable{
     String url;
     public Downloader(String url) {
@@ -39,6 +43,7 @@ public class Downloader implements Runnable{
                     }
                     streamOut.close();
                 }
+                Manager.getInstance().setFile(file);
             } else {
                 return;
             }

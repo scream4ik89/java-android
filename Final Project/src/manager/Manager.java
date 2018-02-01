@@ -1,8 +1,8 @@
 package manager;
 
 import manager.Download.Downloader;
-import manager.Parse.Json;
-import manager.Parse.Xml;
+import manager.Parse.AbstractParser;
+import manager.Parse.ParseFactory;
 import manager.Search.SearchByCountry;
 import manager.Search.SearchByDate;
 import manager.Search.SearchByName;
@@ -26,11 +26,8 @@ public class Manager  {
     private static Manager instance;
     public final String LINKXML = "http://kiparo.ru/t/pub.xml";
     public final String LINKJSON = "http://kiparo.ru/t/pub.json";
-    private static final String beerlXML = "pub.xml";
-    private static final String beerJSON = "pub.json";
-    private static Pub pub;
-
-
+    private File file;
+    private  Pub pub;
 
     //реализация паттерна Singleton
     public void startManager() throws IOException, ParseException {
@@ -38,7 +35,6 @@ public class Manager  {
         begginingOfWork();
     }
     private Manager(){
-
 
     }
     private void PrepareForWork() throws ParseException {
@@ -64,39 +60,9 @@ public class Manager  {
         switch (input) {
             case 1:
                 downloader = new Downloader(LINKXML);
-                Thread thread = new Thread(downloader);
-                thread.start();
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-
-                }
-                if (new File(beerlXML).exists()) {
-                    Xml xml = new Xml();
-                    Thread thread1 = new Thread(xml);
-                    thread1.start();
-
-                } else {
-                    throw new NoFile("Файл " + beerlXML + " не найден. Попробуйте загрузить файл заново.");
-                }
                 break;
-
             case 2:
                 downloader = new Downloader(LINKJSON);
-                Thread thead = new Thread(downloader);
-                thead.start();
-                try {
-                    thead.join();
-                } catch (InterruptedException e) {
-
-                }
-                if (new File(beerJSON).exists()) {
-                    Json json = new Json();
-                    Thread thread1 = new Thread(json);
-                    thread1.start();
-                } else {
-                    throw new NoFile("Файл " + beerJSON + " не найден. Попробуйте загрузить файл заново.");
-                }
                 break;
             default:
                 System.err.println("Некорректный ввод, попробуйте снова:");
@@ -107,6 +73,20 @@ public class Manager  {
                 }
                 this.FunctionalManualPrepareForWork(Input.inputNumber());
                 break;
+        }
+        if (downloader != null){
+            Thread thread = new Thread(downloader);
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+
+            }
+        }
+        if(file != null) {
+            AbstractParser parser = ParseFactory.getParser(file);
+            Thread thread = new Thread(parser);
+            thread.start();
         }
 
     }
@@ -121,7 +101,6 @@ public class Manager  {
         operationMessage(input);
 
     }
-
 
     private void operationMessage(int input) throws IOException {
         if (input == 1) {
@@ -193,6 +172,7 @@ public class Manager  {
         switch (input) {
             case 1:
                 SearchByCountry.search(pub.getGoods());
+                break;
             case 2:
                 SearchByDate.search(pub.getGoods());
                 break;
@@ -210,8 +190,12 @@ public class Manager  {
         }
     }
 
+    public void setFile(File file) {
+        this.file = file;
+    }
+
     public void setPub(Pub pub) {
-        Manager.pub = pub;
+        this.pub = pub;
     }
 
     public static Manager getInstance(){

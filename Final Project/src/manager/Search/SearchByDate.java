@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+    Класс для поиска по определенному запросу
+    с помщью сравнения введенной информации с регулярным выражением
+     */
+
 public class SearchByDate{
 
     public static void search(List<Beer> list) throws IOException {
